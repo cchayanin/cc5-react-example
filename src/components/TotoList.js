@@ -8,7 +8,10 @@ export default class TotoList extends Component {
     text: '',
   }
   addTodo = () => {
-    this.setState({ todo: [...this.state.todo, this.state.text], text: '' })
+    if (this.state.text.trim() !== '') {
+      this.setState({ todo: [...this.state.todo, this.state.text], text: '' })
+    }
+    this.setState({ text: '' })
   }
   edit = (index) => {
     let list = [...this.state.todo]
@@ -119,9 +122,7 @@ export default class TotoList extends Component {
                 this.setState({ text: event.target.value })
               }}
             />
-            <button onClick={this.state.text.length > 0 && this.addTodo}>
-              add
-            </button>
+            <button onClick={this.addTodo}>add</button>
           </div>
         </div>
         <div style={todoStyle.columnComplete}>
